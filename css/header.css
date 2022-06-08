@@ -1,8 +1,13 @@
+body.active {
+	overflow: hidden;
+}
+
 .header {
-	height: 100px;
+	height: 70px;
 	position: sticky;
 	top: 0;
 	backdrop-filter: blur(10px);
+	z-index: 0;
 }
 .header__body {
 	height: 100%;
@@ -10,12 +15,55 @@
 	justify-content: space-between;
 	align-items: center;
 }
+.header__burger {
+	position: absolute;
+	top: 35px;
+	left: 25px;
+	width: 26px;
+	height: 2px;
+	border-radius: 10px;
+	background: #fff;
+	z-index: 100;
+	transition: 0.5s ease-in-out;
+}
+
+.header__burger::before,
+.header__burger::after {
+	content: "";
+	border-radius: 10px;
+	position: absolute;
+	left: 0;
+	width: 26px;
+	height: 2px;
+	background: #fff;
+	transition: 0.3s ease-in-out;
+}
+
+.header__burger::before {
+	top: -7.5px;
+}
+.header__burger::after {
+	top: 7.5px;
+}
+
+.header__burger.active {
+	width: 0;
+}
+.header__burger.active::before {
+	top: 0;
+	transform: rotate(-45deg);
+}
+.header__burger.active::after {
+	top: 0;
+	transform: rotate(45deg);
+}
 .header__logo a {
 	display: flex;
 	align-items: center;
 	color: #3a68b8;
 	text-decoration: none;
 	gap: 1rem;
+	margin-left: 3rem;
 }
 .header__logo img {
 	transition: 0.4s;
@@ -47,17 +95,44 @@
 	width: 100%;
 	bottom: -0.3em;
 }
-
+.blur {
+	position: absolute;
+	top: 0;
+	left: 0vw;
+	min-height: 200%;
+	min-width: 100vw;
+	transition: 0.5s;
+	background: transparent;
+}
+.blur.active {
+	background: rgba(0, 0, 0, 0.5);
+	backdrop-filter: blur(1px);
+}
 .header__nav ul {
+	position: absolute;
+	top: -2rem;
+	left: -20rem;
 	display: flex;
+	flex-direction: column;
+	z-index: 10;
 	list-style: none;
 	gap: 1rem;
+	background: #000;
+	height: 1000vh;
+	width: 50vw;
+	transition: 0.5s ease-in-out;
+}
+.header__nav ul.active {
+	left: -1rem;
 }
 .header__link {
 	transition: 0.4s;
 	color: inherit;
 	text-decoration: none;
 	position: relative;
+}
+.header__nav li:first-child {
+	margin-top: 6rem;
 }
 .header__link::before {
 	content: "";
@@ -87,13 +162,17 @@
 	color: var(--main-color-text);
 	outline: none;
 	border: none;
+	max-width: 120px;
+}
+.header__body > .header__login {
+	display: none;
 }
 .header__login:hover {
 	transform: translateY(-5px);
 	background: var(--button-bg-active);
 }
 
-@media (max-width: 1000px) {
+@media (min-width: 1000px) {
 	.header {
 		height: 70px;
 	}
