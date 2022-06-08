@@ -11,3 +11,10 @@ burger.addEventListener("click", () => {
 	links.classList.toggle("active");
 	blur.classList.toggle("active");
 });
+blur.addEventListener("click", () => {
+	body.classList.toggle("active");
+
+	burger.classList.toggle("active");
+	links.classList.toggle("active");
+	blur.classList.toggle("active");
+});
